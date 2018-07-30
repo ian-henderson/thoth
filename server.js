@@ -1,12 +1,17 @@
 import { ApolloServer } from 'apollo-server-hapi';
 import Hapi from 'hapi';
 
-import typeDefs from './src/graph/rootSchema';
-import resolvers from './src/graph/rootResolver';
+import dataSources from './src/dataSources';
+import { resolvers, typeDefs } from './src/graph';
 
 const hapiServer = new Hapi.server({ port: 4000 });
 
-const apolloServer = new ApolloServer({ typeDefs, resolvers });
+const apolloServer = new ApolloServer({
+  context: () => ({}),
+  dataSources,
+  typeDefs,
+  resolvers,
+});
 
 const startServer = async () => {
   try {

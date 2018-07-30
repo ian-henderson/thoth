@@ -25,6 +25,7 @@
     "nodemon": "^1.18.3"
   },
   "dependencies": {
+    "apollo-datasource-rest": "0.1.0-rc.12",
     "apollo-server-hapi": "^2.0.0",
     "graphql": "^0.13.2",
     "hapi": "^17.5.2"
