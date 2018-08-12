@@ -1,3 +1,3 @@
 # thoth
 
-A GraphQL server that hits HackerNews' REST API.
+A Node.js GraphQL server that hits HackerNews' REST API.
