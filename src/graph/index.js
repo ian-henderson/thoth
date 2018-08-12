@@ -1,2 +1,1 @@
-export { default as resolvers } from './rootResolver';
-export { default as typeDefs } from './rootSchema';
+export { default } from './rootSchema';

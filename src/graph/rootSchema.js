@@ -1,11 +1,25 @@
-import { gql } from 'apollo-server-hapi';
+import { makeExecutableSchema } from 'graphql-tools';
+import Resources from './resources';
+import resolvers from './rootResolver';
 
-// The GraphQL schema
-const typeDefs = gql`
+const resourceTypes = Resources.map(resource => resource.Schema);
+
+const customDateType = `
+  scalar Date
+`;
+
+const queryTypes = `
   type Query {
     "Top Stories"
-    topStories: [ID]
+    topStories: [Story]
   }
 `;
 
-export default typeDefs;
+export default makeExecutableSchema({
+  resolvers,
+  typeDefs: [
+    ...resourceTypes,
+    customDateType,
+    queryTypes,
+  ],
+});

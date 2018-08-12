@@ -7,7 +7,10 @@ class HackerNewsAPI extends RESTDataSource {
   }
 
   async getTopStories() {
-    return this.get('topstories.json');
+    const topStoryIds = await this.get('topstories.json');
+    return Promise.all(
+      topStoryIds.map(id => this.get(`item/${id}.json`)),
+    );
   }
 }
 
