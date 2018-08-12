@@ -2,14 +2,8 @@ import BaseItem from '../BaseItem';
 import { makeCursorFromFields } from '../../utils/Pagination';
 
 class StoryItem extends BaseItem {
-  static LIMIT = 10;
-
-  static getTopStories = async (
-    { first = StoryItem.LIMIT, after },
-    { dataSources },
-  ) => {
-    const { limit, topStories } = await dataSources.hackerNewsAPI
-      .getTopStories(first, after);
+  static getTopStories = async ({ dataSources }) => {
+    const { topStories } = await dataSources.hackerNewsAPI.getTopStories();
 
     const edges = topStories.map(doc => ({
       cursor: makeCursorFromFields([doc.time, doc.id]),
@@ -17,7 +11,7 @@ class StoryItem extends BaseItem {
     }));
 
     const count = edges.length;
-    const hasNextPage = edges.length === limit; // TODO: fix the logic here
+    const hasNextPage = false;
     const endCursor = hasNextPage ? edges[count - 1].cursor : null;
 
     return {
