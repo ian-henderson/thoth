@@ -6,11 +6,20 @@ class HackerNewsAPI extends RESTDataSource {
     this.baseURL = 'https://hacker-news.firebaseio.com/v0/';
   }
 
-  async getTopStories() {
+  async getTopStories(first, after = 0) {
     const topStoryIds = await this.get('topstories.json');
-    return Promise.all(
-      topStoryIds.map(id => this.get(`item/${id}.json`)),
-    );
+
+    const stories = topStoryIds
+      .slice(after, after + first)
+      .map(id => this.get(`item/${id}.json`));
+
+    const limit = topStoryIds.length;
+    const topStories = await Promise.all(stories);
+
+    return {
+      limit,
+      topStories,
+    };
   }
 }
 

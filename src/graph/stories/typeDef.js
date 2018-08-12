@@ -10,6 +10,17 @@ const schema = `
     type: String!
     url: String!
   }
+
+  type StoryEdge {
+    node: Story!
+    cursor: String!
+  }
+
+  type StoriesConnection {
+    count: Int!
+    edges: [StoryEdge]
+    pageInfo: PageInfo
+  }
 `;
 
 export default schema;

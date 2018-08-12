@@ -8,10 +8,17 @@ const customDateType = `
   scalar Date
 `;
 
+const paginationTypes = `
+  type PageInfo {
+    hasNextPage: Boolean!
+    endCursor: String
+  }
+`;
+
 const queryTypes = `
   type Query {
     "Top Stories"
-    topStories: [Story]
+    topStories: StoriesConnection!
   }
 `;
 
@@ -20,6 +27,7 @@ export default makeExecutableSchema({
   typeDefs: [
     ...resourceTypes,
     customDateType,
+    paginationTypes,
     queryTypes,
   ],
 });
